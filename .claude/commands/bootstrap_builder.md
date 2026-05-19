@@ -52,7 +52,22 @@ After the skill runs, read `output/image.json` to get the `hero_image` URL and `
 
 ---
 
-## Step 4 — Build content plan
+## Step 4 — Run the design profile agent
+
+Before writing any HTML, establish the visual identity for the site.
+
+Check $ARGUMENTS for explicit color or font preferences. If the user has specified colors or fonts, skip this step and use them directly when generating `output/custom.css` later.
+
+If no design preferences are given, invoke the design profile agent by reading `.claude/agents/design-profile.md` and executing it with:
+- `industry`: the industry extracted in Step 1
+- `tone`: the tone extracted in Step 1
+- `brand`: the brand name extracted in Step 1
+
+The agent will write `output/design.json` and `output/custom.css`. After it completes, read `output/design.json` to confirm the primary color, fonts, and vibe. Use the vibe and tone to inform the copy written in Step 5 — a "playful" vibe should produce warmer, more energetic copy than a "minimal" vibe.
+
+---
+
+## Step 5 — Build content plan
 
 For each included section, plan specific content tailored to the brand. Never use Lorem Ipsum. Everything must feel like it belongs to this specific business.
 
@@ -70,7 +85,7 @@ Plan the following:
 
 ---
 
-## Step 5 — Write site.json
+## Step 6 — Write site.json
 
 Write `output/site.json` using the Write tool:
 ```json
@@ -82,7 +97,7 @@ Write `output/site.json` using the Write tool:
 
 ---
 
-## Step 6 — Generate each partial
+## Step 7 — Generate each partial
 
 For each section in the chosen list, generate the HTML and write it to `output/partials/[section].html` using the Write tool.
 
@@ -101,7 +116,7 @@ Refer to the skill files in `.claude/commands/` for the exact HTML structure of 
 
 ---
 
-## Step 7 — Run the assembly script
+## Step 8 — Run the assembly script
 
 Run the following command using the Bash tool:
 ```
@@ -110,7 +125,7 @@ python scripts/assemble.py
 
 ---
 
-## Step 8 — Report to the user
+## Step 9 — Report to the user
 
 After successful assembly, report:
 1. "Website assembled at output/index.html"
