@@ -1,0 +1,15 @@
+{
+  "title": "Clarity Math",
+  "sections": [
+    "navbar",
+    "hero",
+    "features",
+    "testimonials",
+    "pricing",
+    "faq",
+    "contact-form",
+    "cta",
+    "footer",
+    "scroll-top-btn"
+  ]
+}
