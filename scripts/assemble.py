@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 PARTIALS_DIR = ROOT / "output" / "partials"
-OUTPUT_FILE = ROOT / "output" / "index.html"
+OUTPUT_DIR = ROOT / "output"
 SITE_CONFIG = ROOT / "output" / "site.json"
 
 DEFAULT_SECTIONS = [
@@ -35,17 +35,19 @@ HTML_FOOT = """
 """
 
 
-def load_config():
-    if SITE_CONFIG.exists():
-        with open(SITE_CONFIG, encoding="utf-8") as f:
+def load_config(config_path=None):
+    path = Path(config_path) if config_path else SITE_CONFIG
+    if path.exists():
+        with open(path, encoding="utf-8") as f:
             return json.load(f)
     return {"title": "My Website", "sections": DEFAULT_SECTIONS}
 
 
-def assemble():
-    config = load_config()
+def assemble(config_path=None):
+    config = load_config(config_path)
     title = config.get("title", "My Website")
     sections = config.get("sections", DEFAULT_SECTIONS)
+    output_file = OUTPUT_DIR / config.get("output", "index.html")
 
     included = []
     skipped = []
@@ -62,9 +64,9 @@ def assemble():
 
     parts.append(HTML_FOOT)
 
-    OUTPUT_FILE.write_text("".join(parts), encoding="utf-8")
+    output_file.write_text("".join(parts), encoding="utf-8")
 
-    print(f"Assembled -> {OUTPUT_FILE}")
+    print(f"Assembled -> {output_file}")
     print(f"  Title:    {title}")
     print(f"  Sections: {' > '.join(included)}")
     if skipped:
@@ -73,7 +75,7 @@ def assemble():
 
 if __name__ == "__main__":
     try:
-        assemble()
+        assemble(sys.argv[1] if len(sys.argv) > 1 else None)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)

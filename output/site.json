@@ -1,15 +1,4 @@
 {
-  "title": "Forma Studio",
-  "sections": [
-    "navbar",
-    "hero",
-    "features",
-    "testimonials",
-    "pricing",
-    "faq",
-    "contact-form",
-    "cta",
-    "footer",
-    "scroll-top-btn"
-  ]
+  "title": "Serenity Flow Yoga Studio",
+  "sections": ["navbar","hero","features","testimonials","pricing","faq","team","contact-form","cta","footer","scroll-top-btn"]
 }

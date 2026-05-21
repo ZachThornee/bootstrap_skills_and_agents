@@ -1,0 +1,5 @@
+{
+  "title": "About Us | Serenity Flow Yoga Studio",
+  "output": "about.html",
+  "sections": ["about-navbar","about-hero","about-story","about-values","team","about-cta","footer","scroll-top-btn"]
+}

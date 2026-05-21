@@ -1,10 +1,10 @@
 {
-  "primary": "#6C63FF",
-  "primary_rgb": "108, 99, 255",
-  "accent": "#FF6B6B",
-  "font_body": "Inter",
-  "font_heading": "Space Grotesk",
-  "vibe": "sophisticated",
-  "rationale": "Graphic design portfolios favour a bold, distinctive primary against dark backgrounds — indigo-violet signals creativity and premium craft, while Space Grotesk headings add geometric personality without sacrificing the clean legibility that lets the work speak.",
-  "sources": ["https://muz.li/blog/top-100-most-creative-and-unique-portfolio-websites-of-2025/"]
+  "primary": "#3E6B5A",
+  "primary_rgb": "62, 107, 90",
+  "accent": "#C9914A",
+  "font_body": "Lato",
+  "font_heading": "Playfair Display",
+  "vibe": "serene",
+  "rationale": "Yoga studios thrive on calm and groundedness — a muted sage green evokes nature and balance without feeling clinical, Playfair Display headings bring an elegant, unhurried quality, and Lato body text stays light and breathable for long reading sessions.",
+  "sources": ["https://susannerieker.com/10-color-schemes-for-your-wellness-or-yoga-website/"]
 }

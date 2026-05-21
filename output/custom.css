@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@400;500;700&display=swap');
 
 :root {
-  --bs-primary: #6C63FF;
-  --bs-primary-rgb: 108, 99, 255;
-  --bs-font-sans-serif: 'Inter', system-ui, sans-serif;
+  --bs-primary: #3E6B5A;
+  --bs-primary-rgb: 62, 107, 90;
+  --bs-font-sans-serif: 'Lato', system-ui, sans-serif;
 }
 
 html {
@@ -11,11 +11,13 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Lato', system-ui, sans-serif;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .btn-primary {
@@ -36,6 +38,7 @@ h1, h2, h3, h4 {
 .btn-outline-primary:hover {
   background-color: var(--bs-primary);
   border-color: var(--bs-primary);
+  color: #fff;
 }
 
 .text-primary {

@@ -37,6 +37,11 @@ Use this decision matrix. Be selective — a focused 5-6 section site is better 
 
 Decide the section order. Standard order: navbar → hero → features → testimonials → pricing → faq → team → contact-form → cta → footer → scroll-top-btn
 
+Also scan $ARGUMENTS for any additional pages the user wants beyond the landing page. Common signals: "with an about page", "include a contact page", "also make a services page". Extract these as:
+- `additional_pages`: list of page types requested (e.g. `["about", "contact", "services"]`)
+
+If no additional pages are mentioned, `additional_pages` is empty and this is a single-page site.
+
 ---
 
 ## Step 3 — Source the hero image
@@ -125,10 +130,45 @@ python scripts/assemble.py
 
 ---
 
-## Step 9 — Report to the user
+## Step 9 — Build additional pages (if requested)
+
+Skip this step entirely if `additional_pages` is empty.
+
+If additional pages were requested, do the following for each page type in the list:
+
+### 9a — Invoke the page-builder agent
+
+Read `.claude/agents/page-builder.md` and execute it with:
+- `page_type`: the page type (e.g. "about")
+- `brand`: the brand name from Step 1
+- `industry`: the industry from Step 1
+- `tone`: the tone from Step 1
+- `all_pages`: a list of all pages in the site, including the landing page and every additional page. Format:
+  ```
+  [{"label": "Home", "url": "index.html"}, {"label": "About", "url": "about.html"}, ...]
+  ```
+  Use a capitalised label for each page type (About, Contact, Services, etc.).
+
+The agent will generate partials, write `output/[page_type]-site.json`, and produce `output/[page_type].html`.
+
+### 9b — Update the landing page navbar
+
+After ALL additional pages have been built, regenerate `output/partials/navbar.html` so it links to every page in the site using full filenames:
+- Landing page sections become `href="index.html#section-id"` (so they still work from other pages)
+- Additional pages get their own `<li>` with `href="[page].html"`
+
+Then re-run the landing page assembly to pick up the new navbar:
+```
+python scripts/assemble.py
+```
+
+---
+
+## Step 10 — Report to the user
 
 After successful assembly, report:
-1. "Website assembled at output/index.html"
-2. A brief list of which sections were included
-3. One short sentence on any sections that were intentionally left out and why
-4. A suggestion for what to refine next (e.g., "replace placeholder images with real photos", "swap the primary color", "add a gallery section")
+1. Files assembled (e.g. "output/index.html, output/about.html")
+2. A brief list of which sections were included on the landing page
+3. Which additional pages were generated and what sections each contains
+4. One short sentence on any sections that were intentionally left out and why
+5. A suggestion for what to refine next (e.g., "replace placeholder images with real photos", "swap the primary color", "add a gallery section")

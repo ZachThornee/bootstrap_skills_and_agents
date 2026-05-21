@@ -1,0 +1,5 @@
+{
+  "title": "Contact | Serenity Flow Yoga Studio",
+  "output": "contact.html",
+  "sections": ["contact-navbar","contact-hero","contact-form","faq","contact-cta","footer","scroll-top-btn"]
+}
