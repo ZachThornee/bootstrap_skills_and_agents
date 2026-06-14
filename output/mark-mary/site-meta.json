@@ -1,0 +1,11 @@
+{
+  "index.html": {
+    "description": "Join us as Mark & Mary celebrate their wedding on September 20, 2026 at Rosewood Estate in Springfield, IL. RSVP online by August 20.",
+    "og_title": "Mark & Mary - Together Forever | September 20, 2026",
+    "og_description": "We're getting married! Join Mark & Mary on September 20, 2026 at The Grand Terrace, Rosewood Estate, Springfield IL. RSVP by August 20.",
+    "og_image": "https://source.unsplash.com/800x500/?wedding+elegant+ceremony+flowers",
+    "og_type": "website",
+    "twitter_card": "summary_large_image",
+    "canonical": "https://example.com/index.html"
+  }
+}

@@ -1,0 +1,65 @@
+<section id="contact-form" class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold text-primary">RSVP</h2>
+          <p class="text-muted lead">Please let us know if you'll be joining us. Deadline: <strong>August 20, 2026</strong>.</p>
+        </div>
+        <div class="card shadow-sm border-0 p-4 p-lg-5">
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label fw-semibold">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Jane" required>
+              </div>
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label fw-semibold">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Smith" required>
+              </div>
+              <div class="col-12">
+                <label for="email" class="form-label fw-semibold">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="jane@example.com" required>
+              </div>
+              <div class="col-sm-6">
+                <label for="attendance" class="form-label fw-semibold">Will You Attend?</label>
+                <select class="form-select" id="attendance" name="attendance" required>
+                  <option value="" selected disabled>Please select...</option>
+                  <option value="yes">Joyfully Accepts</option>
+                  <option value="no">Regretfully Declines</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="guests" class="form-label fw-semibold">Number of Guests</label>
+                <select class="form-select" id="guests" name="guests">
+                  <option value="1" selected>1 (just me)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="dietary" class="form-label fw-semibold">Dietary Requirements</label>
+                <select class="form-select" id="dietary" name="dietary">
+                  <option value="none" selected>No restrictions</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="vegan">Vegan</option>
+                  <option value="gluten-free">Gluten-Free</option>
+                  <option value="nut-free">Nut-Free</option>
+                  <option value="other">Other (please specify below)</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="message" class="form-label fw-semibold">Message for Mark &amp; Mary <span class="text-muted fw-normal">(optional)</span></label>
+                <textarea class="form-control" id="message" name="message" rows="3" placeholder="Share a well-wish, a song request, or any dietary details..."></textarea>
+              </div>
+              <div class="col-12 text-center mt-2">
+                <button type="submit" class="btn btn-primary btn-lg px-5">Send RSVP</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

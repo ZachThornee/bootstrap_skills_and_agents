@@ -6,7 +6,9 @@ An agentic system that takes a plain English prompt and generates a complete, de
 
 ## Quick Start
 
-### 1. Generate a site
+`/bootstrap_builder` is the single entry point for everything. It detects your intent automatically and routes to the right operation.
+
+### Generate a new site
 
 ```
 /bootstrap_builder create a landing page for a yoga studio with an about page and a contact page
@@ -20,52 +22,50 @@ An agentic system that takes a plain English prompt and generates a complete, de
 /bootstrap_builder make a SaaS landing page for a project management tool called TaskFlow, include a pricing page
 ```
 
-That single command runs the full 14-step pipeline:
+Runs the full 14-step pipeline:
 
 ```
 image sourcing → design research → content planning → HTML generation
 → assembly → additional pages → SEO meta → QA review
 ```
 
-The site is written to `output/[site-slug]/` (e.g. `output/jane-smith/`). Every build also writes `output/.last-build` so post-build commands auto-discover the site without you needing to type the folder name.
+The site is written to `output/[site-slug]/` (e.g. `output/jane-smith/`). Every build writes `output/.last-build` so subsequent commands auto-discover the site.
 
 ---
 
-### 2. Restyle the site
+### Restyle an existing site
 
-After a build, you can completely overhaul the visual identity with a plain English style prompt:
-
-```
-read .claude/agents/restyle.md and run it with "Modern dark theme tech startup"
-```
+Use any of these trigger phrases and `/bootstrap_builder` will route to the restyle agent automatically:
 
 ```
-read .claude/agents/restyle.md and run it with "Tron vibes, dark, technological and slick"
+/bootstrap_builder restyle with "Tron vibes, dark, technological and slick"
 ```
 
 ```
-read .claude/agents/restyle.md and run it with "Luxury spa minimalist"
+/bootstrap_builder make it look more minimal and clean
 ```
 
 ```
-read .claude/agents/restyle.md and run it with "Bold energetic fitness brand"
+/bootstrap_builder change the theme to bold energetic fitness brand
 ```
 
 ```
-read .claude/agents/restyle.md and run it with "Warm earthy organic cafe"
+/bootstrap_builder update the style to warm earthy organic cafe
 ```
 
 ```
-read .claude/agents/restyle.md and run it with "Retro brutalist editorial"
+/bootstrap_builder new look — retro brutalist editorial
 ```
+
+Without a site name, restyle targets the most recent build (via `output/.last-build`). To target a specific older site, name it:
+
+```
+/bootstrap_builder restyle serenity-flow with "Luxury spa minimalist"
+```
+
+**Trigger words** (any of these route to restyle): `restyle`, `re-style`, `change the style`, `change the theme`, `change the design`, `make it look`, `make it more`, `update the design`, `update the style`, `update the theme`, `new theme`, `new style`, `new look`
 
 Restyle goes well beyond swapping colors — it controls fonts, button shape, card style (glassmorphism vs flat vs bordered), navbar appearance, hero backgrounds, section alternation, hover animations, and spacing density. It rewrites `custom.css` comprehensively and edits Bootstrap utility classes directly in partials where CSS alone can't achieve the effect.
-
-The restyle agent auto-discovers the most recent build via `output/.last-build`. To restyle an older build, provide the folder explicitly:
-
-```
-read .claude/agents/restyle.md and run it on output/serenity-flow with "Warm earthy organic cafe"
-```
 
 ---
 
@@ -423,8 +423,9 @@ Every build lives in its own subfolder under `output/`. This means:
 
 | Command | What it does |
 |---------|-------------|
+| `/bootstrap_builder restyle with "Dark tech"` | Restyle the last build |
+| `/bootstrap_builder restyle serenity-flow with "Dark tech"` | Restyle a specific older build |
 | `read .claude/agents/review.md and run it` | QA audit the last build |
-| `read .claude/agents/restyle.md and run it with "..."` | Restyle the last build |
 | `python scripts/assemble.py` | Re-assemble the last build's landing page |
 | `python scripts/assemble.py output/[slug]/[page]-site.json` | Re-assemble a specific page |
 | `/seo-meta` | Regenerate SEO meta tags for the last build |

@@ -1,7 +1,35 @@
-You are a Bootstrap 5 website orchestrator. Your job is to take a user's plain English description and produce a complete, assembled Bootstrap 5 website. You coordinate every step from content planning to final assembly.
+You are a Bootstrap 5 website orchestrator. You handle two operations: generating a new site from scratch, and restyling an existing site. Detect which operation the user wants in Step 0, then follow the appropriate path.
 
 ## Input
-$ARGUMENTS — a natural language description of the website the user wants to build.
+$ARGUMENTS — either a natural language description of a new website, or a restyle instruction for an existing one.
+
+---
+
+## Step 0 — Detect intent
+
+Scan $ARGUMENTS for any of these explicit restyle trigger words or phrases (case-insensitive):
+- `restyle`, `re-style`
+- `change the style`, `change the theme`, `change the design`
+- `make it look`, `make it more`
+- `update the design`, `update the style`, `update the theme`
+- `new theme`, `new style`, `new look`
+
+**If a trigger is found → RESTYLE PATH:**
+
+Extract:
+- `style_descriptor`: everything in $ARGUMENTS that describes the desired look (e.g. "dark brutalist", "warm earthy organic"). Strip the trigger phrase itself — only keep the description.
+- `target_slug`: if $ARGUMENTS names a specific site (e.g. "restyle mark-twinjamin", "change the style of serenity-flow"), extract that slug. Otherwise leave blank.
+
+Then:
+1. If `target_slug` is blank, read `output/.last-build` to get the most recent site slug.
+2. Set `SITE_DIR = output/[slug]`.
+3. Confirm to the user: "Restyling `[SITE_DIR]` with: *[style_descriptor]*"
+4. Read `.claude/agents/restyle.md` and execute it with `SITE_DIR` set to `[SITE_DIR]` and the `style_descriptor` as the style prompt.
+5. Stop — do not proceed to Step 1.
+
+**If no trigger is found → GENERATE PATH:**
+
+Continue to Step 1 and run the full 14-step generation pipeline.
 
 ---
 
