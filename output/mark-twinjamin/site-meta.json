@@ -1,0 +1,20 @@
+{
+  "index.html": {
+    "description": "Mark Twinjamin is a freelance full-stack developer available for hire. React, Node.js, PostgreSQL. Clean code, reliable delivery, and 40+ shipped projects.",
+    "og_title": "Mark Twinjamin - Freelance Developer",
+    "og_description": "Hire a full-stack freelance developer with 8+ years of experience. React, Node.js, APIs, and performance optimization. Available for contracts worldwide.",
+    "og_image": "https://source.unsplash.com/800x500/?developer+coding+laptop",
+    "og_type": "website",
+    "twitter_card": "summary_large_image",
+    "canonical": "https://example.com/index.html"
+  },
+  "portfolio.html": {
+    "description": "Browse Mark Twinjamin's portfolio of freelance development projects — SaaS dashboards, e-commerce platforms, real-time apps, and API engineering work.",
+    "og_title": "Portfolio | Mark Twinjamin",
+    "og_description": "See 6 featured projects from freelance developer Mark Twinjamin — spanning full-stack SaaS, headless e-commerce, real-time collaboration tools, and performance wins.",
+    "og_image": "https://source.unsplash.com/800x500/?developer+coding+laptop",
+    "og_type": "website",
+    "twitter_card": "summary_large_image",
+    "canonical": "https://example.com/portfolio.html"
+  }
+}

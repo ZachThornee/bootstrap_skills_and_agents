@@ -1,0 +1,67 @@
+<section id="contact-form" class="py-5">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <h2 class="fw-bold text-primary mb-3">Let's Work Together</h2>
+        <p class="text-muted mb-4">Have a project in mind? Drop me a message and I'll get back to you within 24 hours. No commitment required — let's just talk.</p>
+        <ul class="list-unstyled">
+          <li class="d-flex align-items-center mb-3">
+            <i class="fa-solid fa-envelope text-primary me-3 fa-lg"></i>
+            <span class="text-muted">mark@twinjamin.dev</span>
+          </li>
+          <li class="d-flex align-items-center mb-3">
+            <i class="fa-solid fa-clock text-primary me-3 fa-lg"></i>
+            <span class="text-muted">Response within 24 hours</span>
+          </li>
+          <li class="d-flex align-items-center mb-4">
+            <i class="fa-solid fa-location-dot text-primary me-3 fa-lg"></i>
+            <span class="text-muted">Remote — Available Worldwide</span>
+          </li>
+        </ul>
+        <div class="d-flex gap-3 mt-2">
+          <a href="#" class="btn btn-outline-primary btn-sm"><i class="fa-brands fa-github me-1"></i> GitHub</a>
+          <a href="#" class="btn btn-outline-primary btn-sm"><i class="fa-brands fa-linkedin me-1"></i> LinkedIn</a>
+          <a href="#" class="btn btn-outline-primary btn-sm"><i class="fa-brands fa-x-twitter me-1"></i> X</a>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card shadow-sm border-0 p-4 p-lg-5">
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label fw-semibold">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Jane" required>
+              </div>
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label fw-semibold">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Smith" required>
+              </div>
+              <div class="col-12">
+                <label for="email" class="form-label fw-semibold">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="jane@company.com" required>
+              </div>
+              <div class="col-12">
+                <label for="projectType" class="form-label fw-semibold">Project Type</label>
+                <select class="form-select" id="projectType" name="projectType">
+                  <option value="" selected disabled>Select a service...</option>
+                  <option value="fullstack">Full-Stack Development</option>
+                  <option value="api">API & Backend Engineering</option>
+                  <option value="performance">Performance Optimization</option>
+                  <option value="consulting">Technical Consulting</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="message" class="form-label fw-semibold">Project Details</label>
+                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Tell me about your project — timeline, stack, goals..." required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

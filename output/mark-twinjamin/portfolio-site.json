@@ -1,0 +1,5 @@
+{
+  "title": "Portfolio | Mark Twinjamin",
+  "output": "portfolio.html",
+  "sections": ["portfolio-navbar", "portfolio-hero", "portfolio-projects", "portfolio-skills", "portfolio-cta", "footer", "scroll-top-btn"]
+}

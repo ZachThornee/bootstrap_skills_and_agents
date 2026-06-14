@@ -1,0 +1,10 @@
+{
+  "primary": "#00D9FF",
+  "primary_rgb": "0, 217, 255",
+  "accent": "#FF6B35",
+  "font_body": "Rajdhani",
+  "font_heading": "Orbitron",
+  "vibe": "cyberpunk",
+  "rationale": "Electric cyan on deep space-black delivers the Tron Legacy aesthetic — sharp grid lines, glowing borders, and Orbitron headlines reinforce the technological identity without sacrificing readability.",
+  "sources": ["https://brittanychiang.com", "https://designshack.net/articles/trends/best-website-color-schemes/"]
+}

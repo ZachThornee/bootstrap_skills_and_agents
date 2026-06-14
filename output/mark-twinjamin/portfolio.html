@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Mark Twinjamin</title>
+  <meta name="description" content="Browse Mark Twinjamin's portfolio of freelance development projects — SaaS dashboards, e-commerce platforms, real-time apps, and API engineering work.">
+  <link rel="canonical" href="https://example.com/portfolio.html">
+  <meta property="og:title" content="Portfolio | Mark Twinjamin">
+  <meta property="og:description" content="See 6 featured projects from freelance developer Mark Twinjamin — spanning full-stack SaaS, headless e-commerce, real-time collaboration tools, and performance wins.">
+  <meta property="og:image" content="https://source.unsplash.com/800x500/?developer+coding+laptop">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio | Mark Twinjamin">
+  <meta name="twitter:description" content="See 6 featured projects from freelance developer Mark Twinjamin — spanning full-stack SaaS, headless e-commerce, real-time collaboration tools, and performance wins.">
+  <meta name="twitter:image" content="https://source.unsplash.com/800x500/?developer+coding+laptop">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+
+<!-- portfolio-navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4 text-primary" href="index.html">Mark Twinjamin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#portfolioNav" aria-controls="portfolioNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="portfolioNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="portfolio.html">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#features">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact-form">Contact</a></li>
+      </ul>
+      <a href="index.html#contact-form" class="btn btn-primary ms-3">Hire Me</a>
+    </div>
+  </div>
+</nav>
+
+<!-- portfolio-hero -->
+<section id="portfolio-hero" class="py-5">
+  <div class="container text-center py-4">
+    <h1 class="display-4 fw-bold text-primary">My Work</h1>
+    <p class="lead text-muted mt-3 mb-4 mx-auto" style="max-width: 600px;">
+      From SaaS dashboards to real-time APIs, here's a selection of projects that showcase what I build and how I think.
+    </p>
+    <a href="#portfolio-projects" class="btn btn-warning fw-semibold px-4 py-2" style="color: #fff;">
+      View Projects <i class="fa-solid fa-arrow-down ms-2"></i>
+    </a>
+  </div>
+</section>
+
+<!-- portfolio-projects -->
+<section id="portfolio-projects" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-primary">Featured Projects</h2>
+      <p class="text-muted">A cross-section of the real-world problems I've solved.</p>
+    </div>
+    <div class="row g-4">
+
+      <!-- Project 1: SaaS Analytics Dashboard -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <img src="https://placehold.co/600x400/070b14/00D9FF?text=Metriflow+Dashboard" class="card-img-top" alt="Metriflow Dashboard">
+          <div class="card-body d-flex flex-column">
+            <div class="mb-2">
+              <span class="badge text-bg-warning fw-semibold">Full-Stack</span>
+            </div>
+            <h5 class="card-title fw-bold mt-1">Metriflow</h5>
+            <div class="mb-2">
+              <span class="badge text-bg-light text-dark me-1 border">React</span>
+              <span class="badge text-bg-light text-dark me-1 border">Node.js</span>
+              <span class="badge text-bg-light text-dark me-1 border">PostgreSQL</span>
+            </div>
+            <p class="card-text text-muted small flex-grow-1">A multi-tenant SaaS analytics dashboard with real-time KPI tracking, custom report builder, and role-based access control.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm mt-3 align-self-start">View Case Study</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: E-commerce Platform -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <img src="https://placehold.co/600x400/0d1626/00D9FF?text=ShopFront+Platform" class="card-img-top" alt="ShopFront Platform">
+          <div class="card-body d-flex flex-column">
+            <div class="mb-2">
+              <span class="badge text-bg-warning fw-semibold">Frontend</span>
+            </div>
+            <h5 class="card-title fw-bold mt-1">ShopFront</h5>
+            <div class="mb-2">
+              <span class="badge text-bg-light text-dark me-1 border">Next.js</span>
+              <span class="badge text-bg-light text-dark me-1 border">Stripe</span>
+              <span class="badge text-bg-light text-dark me-1 border">Sanity CMS</span>
+            </div>
+            <p class="card-text text-muted small flex-grow-1">A headless e-commerce storefront for a boutique apparel brand, featuring dynamic product pages, cart persistence, and Stripe checkout.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm mt-3 align-self-start">View Case Study</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Real-time Chat / Collaboration Tool -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <img src="https://placehold.co/600x400/070b14/FF6B35?text=Threadline+Chat" class="card-img-top" alt="Threadline Chat">
+          <div class="card-body d-flex flex-column">
+            <div class="mb-2">
+              <span class="badge text-bg-warning fw-semibold">Full-Stack</span>
+            </div>
+            <h5 class="card-title fw-bold mt-1">Threadline</h5>
+            <div class="mb-2">
+              <span class="badge text-bg-light text-dark me-1 border">React</span>
+              <span class="badge text-bg-light text-dark me-1 border">Socket.io</span>
+              <span class="badge text-bg-light text-dark me-1 border">Redis</span>
+            </div>
+            <p class="card-text text-muted small flex-grow-1">A real-time team collaboration tool with threaded channels, presence indicators, file sharing, and end-to-end message encryption.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm mt-3 align-self-start">View Case Study</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4: REST API / Backend Service -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <img src="https://placehold.co/600x400/0d1626/00D9FF?text=CoreAPI+Gateway" class="card-img-top" alt="CoreAPI Gateway">
+          <div class="card-body d-flex flex-column">
+            <div class="mb-2">
+              <span class="badge text-bg-warning fw-semibold">Backend</span>
+            </div>
+            <h5 class="card-title fw-bold mt-1">CoreAPI Gateway</h5>
+            <div class="mb-2">
+              <span class="badge text-bg-light text-dark me-1 border">Express.js</span>
+              <span class="badge text-bg-light text-dark me-1 border">JWT</span>
+              <span class="badge text-bg-light text-dark me-1 border">Docker</span>
+            </div>
+            <p class="card-text text-muted small flex-grow-1">A production REST API gateway handling auth, rate limiting, and request routing for a fintech startup serving 50,000+ daily active users.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm mt-3 align-self-start">View Case Study</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5: Mobile-first Booking App (PWA) -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <img src="https://placehold.co/600x400/FF6B35/070b14?text=BookEase+PWA" class="card-img-top" alt="BookEase PWA">
+          <div class="card-body d-flex flex-column">
+            <div class="mb-2">
+              <span class="badge text-bg-warning fw-semibold">Mobile</span>
+            </div>
+            <h5 class="card-title fw-bold mt-1">BookEase</h5>
+            <div class="mb-2">
+              <span class="badge text-bg-light text-dark me-1 border">Vue.js</span>
+              <span class="badge text-bg-light text-dark me-1 border">PWA</span>
+              <span class="badge text-bg-light text-dark me-1 border">Firebase</span>
+            </div>
+            <p class="card-text text-muted small flex-grow-1">A mobile-first progressive web app for a salon chain, enabling clients to book appointments, receive push reminders, and manage cancellations offline.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm mt-3 align-self-start">View Case Study</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6: Performance Overhaul -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <img src="https://placehold.co/600x400/070b14/00D9FF?text=Velocity+Audit" class="card-img-top" alt="Velocity Performance Audit">
+          <div class="card-body d-flex flex-column">
+            <div class="mb-2">
+              <span class="badge text-bg-warning fw-semibold">API</span>
+            </div>
+            <h5 class="card-title fw-bold mt-1">Velocity Overhaul</h5>
+            <div class="mb-2">
+              <span class="badge text-bg-light text-dark me-1 border">Node.js</span>
+              <span class="badge text-bg-light text-dark me-1 border">Redis</span>
+              <span class="badge text-bg-light text-dark me-1 border">Lighthouse</span>
+            </div>
+            <p class="card-text text-muted small flex-grow-1">End-to-end performance audit and refactor of a high-traffic media site, cutting average page load from 8.4 s to 1.9 s and boosting Lighthouse score from 42 to 96.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm mt-3 align-self-start">View Case Study</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- portfolio-skills -->
+<section id="portfolio-skills" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-primary">Tech Stack</h2>
+      <p class="text-muted">The languages, frameworks, and tools I reach for every day.</p>
+    </div>
+    <div class="row g-4">
+
+      <!-- Frontend -->
+      <div class="col-6 col-md-3">
+        <h6 class="fw-bold text-uppercase text-muted small mb-3 letter-spacing-1">Frontend</h6>
+        <div>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">React</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Next.js</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Vue.js</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">TypeScript</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Tailwind CSS</span>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div class="col-6 col-md-3">
+        <h6 class="fw-bold text-uppercase text-muted small mb-3">Backend</h6>
+        <div>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Node.js</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Express.js</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Python</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">GraphQL</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">REST APIs</span>
+        </div>
+      </div>
+
+      <!-- Databases -->
+      <div class="col-6 col-md-3">
+        <h6 class="fw-bold text-uppercase text-muted small mb-3">Databases</h6>
+        <div>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">PostgreSQL</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">MongoDB</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Redis</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">MySQL</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Firebase</span>
+        </div>
+      </div>
+
+      <!-- Tools & DevOps -->
+      <div class="col-6 col-md-3">
+        <h6 class="fw-bold text-uppercase text-muted small mb-3">Tools &amp; DevOps</h6>
+        <div>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Docker</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">GitHub Actions</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">AWS</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Vercel</span>
+          <span class="badge me-2 mb-2 fs-6 fw-normal" style="background-color: rgba(0,217,255,0.12); color: #00D9FF; border: 1px solid rgba(0,217,255,0.3);">Linux / Nginx</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- portfolio-cta -->
+<section id="portfolio-cta" class="py-5">
+  <div class="container text-center text-white py-3">
+    <h2 class="fw-bold display-6 mb-3">Like What You See?</h2>
+    <p class="lead mb-4 text-white-75" style="opacity: 0.85;">Let's talk about your next project.</p>
+    <a href="index.html#contact-form" class="btn btn-warning fw-semibold px-5 py-2 fs-5" style="color: #fff;">
+      Get In Touch <i class="fa-solid fa-arrow-right ms-2"></i>
+    </a>
+  </div>
+</section>
+
+<!-- footer -->
+<footer id="footer" class="py-5 bg-dark text-white">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 mb-3">
+        <h5 class="fw-bold fs-4 mb-2">Mark Twinjamin</h5>
+        <p class="text-white-50 mb-4">Clean code. Reliable delivery.</p>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-white-50 fs-5"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="text-white-50 fs-5"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#" class="text-white-50 fs-5"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-2 offset-lg-2">
+        <h6 class="fw-bold text-white mb-3">Navigate</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="index.html" class="text-white-50 text-decoration-none">Home</a></li>
+          <li class="mb-2"><a href="portfolio.html" class="text-white-50 text-decoration-none">Portfolio</a></li>
+          <li class="mb-2"><a href="index.html#testimonials" class="text-white-50 text-decoration-none">Testimonials</a></li>
+          <li class="mb-2"><a href="index.html#faq" class="text-white-50 text-decoration-none">FAQ</a></li>
+          <li class="mb-2"><a href="index.html#contact-form" class="text-white-50 text-decoration-none">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-lg-2">
+        <h6 class="fw-bold text-white mb-3">Services</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="index.html#features" class="text-white-50 text-decoration-none">Full-Stack Dev</a></li>
+          <li class="mb-2"><a href="index.html#features" class="text-white-50 text-decoration-none">API Engineering</a></li>
+          <li class="mb-2"><a href="index.html#features" class="text-white-50 text-decoration-none">Performance</a></li>
+          <li class="mb-2"><a href="index.html#features" class="text-white-50 text-decoration-none">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-lg-2">
+        <h6 class="fw-bold text-white mb-3">Connect</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">GitHub</a></li>
+          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">LinkedIn</a></li>
+          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">X / Twitter</a></li>
+          <li class="mb-2"><a href="mailto:mark@twinjamin.dev" class="text-white-50 text-decoration-none">Email Me</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-secondary my-4">
+    <div class="text-center text-white-50 small">
+      &copy; 2026 Mark Twinjamin. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- scroll-top-btn -->
+<button id="scrollTopBtn" class="btn btn-primary rounded-circle shadow" style="display:none;position:fixed;bottom:2rem;right:2rem;width:48px;height:48px;z-index:1000;">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="custom.js"></script>
+</body>
+</html>
