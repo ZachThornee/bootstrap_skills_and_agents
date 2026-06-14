@@ -56,16 +56,16 @@ bootstrap_builder (orchestrator — .claude/commands/bootstrap_builder.md)
     ├── Step 10:   python scripts/assemble.py [SITE_DIR]/site.json
     │              └── writes [SITE_DIR]/index.html
     │
-    ├── Step 11:   seo-meta skill → writes meta tags for all pages
-    │              └── writes [SITE_DIR]/site-meta.json, re-assembles all HTML
-    │
-    ├── Step 12:   page-builder agent (one per additional page requested)
+    ├── Step 11:   page-builder agent (one per additional page requested)
     │              └── writes [SITE_DIR]/[page].html
+    │
+    ├── Step 12:   seo-meta skill → runs after ALL pages exist
+    │              └── writes [SITE_DIR]/site-meta.json, re-assembles all HTML
     │
     ├── Step 13:   review agent → audits all assembled HTML
     │              └── outputs PASS/WARN/FAIL report, auto-fixes simple issues
     │
-    └── Step 14:   Report to user (including SITE_DIR folder path)
+    └── Step 14:   Record output/.last-build → Report to user
 ```
 
 ### Technology Stack
@@ -113,6 +113,7 @@ bootstrap_skills_and_agents/
 │   └── assemble.py             # Stitches partials into complete HTML pages
 │
 └── output/                     # One subfolder per generated site
+    ├── .last-build             ← Slug of the most recent build (auto-written)
     └── [site-slug]/            ← Named from brand (e.g. serenity-flow)
         ├── index.html          ← Assembled landing page
         ├── about.html          ← Additional page (if requested)
@@ -145,7 +146,7 @@ bootstrap_skills_and_agents/
 
 ## Skills (Slash Commands)
 
-Skills live in `.claude/commands/`. Each skill has one job: generate one Bootstrap 5 component and write it to `output/partials/`.
+Skills live in `.claude/commands/`. Each skill has one job: generate one Bootstrap 5 component and write it to `[SITE_DIR]/partials/`. All skills accept a `SITE_DIR` parameter — defaults to `output/` when run standalone.
 
 | Skill | What it generates | Output file |
 |-------|------------------|-------------|
@@ -192,7 +193,7 @@ Agents live in `.claude/agents/`. Unlike skills (one output, deterministic), age
 ### `design-profile` — Visual Identity Research
 Runs automatically during every `bootstrap_builder` build. Searches the web for real industry design patterns, visits a competitor site, and synthesizes a unique color + font profile. Ensures no two sites look the same.
 
-**Outputs:** `output/design.json`, `output/custom.css`
+**Outputs:** `[SITE_DIR]/design.json`, `[SITE_DIR]/custom.css`
 
 **Rules:**
 - Never defaults to Bootstrap blue (`#0d6efd`)
@@ -224,7 +225,7 @@ Runs at the end of every `bootstrap_builder` build. Reads all assembled HTML fil
 | B | All `href="page.html"` cross-page links point to existing files |
 | C | Brand name is consistent across all pages (title, navbar, footer) |
 | D | Every page has a navbar linking to all other pages |
-| E | Contact forms have a non-empty `action` attribute |
+| E | Contact forms have a real `action` URL (WARN if Formspree placeholder not replaced, FAIL if action missing) |
 | F | Hero image is a real URL (not `placehold.co`) |
 | G | No placeholder copy leaked (`[brand name]`, `@example.com`, etc.) |
 | H | `custom.css` font names match `design.json` |
@@ -319,22 +320,22 @@ python scripts/assemble.py output/serenity-flow/about-site.json
 
 ## Post-Build Commands
 
-These can be run on any existing build without rebuilding from scratch. Replace `output/serenity-flow` with the actual site folder name.
+`review` and `restyle` auto-discover the most recent build via `output/.last-build` — no need to specify the folder. For older builds, pass `SITE_DIR` explicitly.
 
 | Command | What it does |
 |---------|-------------|
-| `/seo-meta` | Generate / regenerate SEO meta tags |
-| read `review.md` and run with SITE_DIR `output/serenity-flow` | Run QA audit on a site |
-| read `restyle.md` and run with prompt | Overhaul the visual theme |
-| `python scripts/assemble.py output/serenity-flow/site.json` | Re-assemble landing page |
-| `python scripts/assemble.py output/serenity-flow/about-site.json` | Re-assemble a specific page |
+| `read .claude/agents/review.md and run it` | QA audit the last build (auto-discovers site) |
+| `read .claude/agents/restyle.md and run it with "Dark tech"` | Restyle the last build |
+| `python scripts/assemble.py` | Re-assemble the last build's landing page |
+| `python scripts/assemble.py output/[slug]/about-site.json` | Re-assemble a specific page |
+| `/seo-meta` | Regenerate SEO meta tags for the last build |
 
 ---
 
 ## Workflow
 
 1. **Prompt** — describe the site in plain English, optionally request additional pages
-2. **Build** — `bootstrap_builder` runs the full 12-step pipeline automatically
+2. **Build** — `bootstrap_builder` runs the full 14-step pipeline automatically and writes `output/.last-build`
 3. **Review** — QA report identifies any issues; simple ones are auto-fixed
 4. **Refine** — edit individual partials and re-run `assemble.py`, or use `restyle` for a full visual overhaul
-5. **Deploy** — copy the `output/` folder to any static host (Netlify, GitHub Pages, etc.)
+5. **Deploy** — copy the `output/[site-slug]/` folder to any static host (Netlify, GitHub Pages, etc.)

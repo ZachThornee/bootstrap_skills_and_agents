@@ -19,7 +19,7 @@ Read `[SITE_DIR]/design.json` to get the site's `primary` color, `font_heading`,
 
 ## Step 2 — Choose sections for the page
 
-Use this matrix to decide which sections to include. Prefix all page-specific sections with `[page_type]-` (e.g. `about-hero`, `about-story`). Shared sections that already exist on the landing page (`footer`, `scroll-top-btn`, `team`, `testimonials`, `pricing`, `faq`) can be reused without a prefix — list them by their existing name and they will be picked up from `output/partials/`.
+Use this matrix to decide which sections to include. Prefix all page-specific sections with `[page_type]-` (e.g. `about-hero`, `about-story`). Shared sections that already exist on the landing page (`footer`, `scroll-top-btn`, `team`, `testimonials`, `pricing`, `faq`) can be reused without a prefix — list them by their existing name and they will be picked up from `[SITE_DIR]/partials/`.
 
 | page_type  | Sections to generate                                                                 | Shared sections to reuse      |
 |------------|--------------------------------------------------------------------------------------|-------------------------------|

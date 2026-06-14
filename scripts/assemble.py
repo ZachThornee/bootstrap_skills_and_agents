@@ -91,7 +91,7 @@ def resolve_site_dir(config_path):
             "Error: no config found.\n"
             "Usage:  python scripts/assemble.py output/[slug]/site.json\n"
             "        python scripts/assemble.py output/[slug]/about-site.json",
-            file=__import__("sys").stderr,
+            file=sys.stderr,
         )
         raise SystemExit(1)
     return legacy

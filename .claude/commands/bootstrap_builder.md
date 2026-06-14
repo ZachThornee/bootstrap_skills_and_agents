@@ -154,6 +154,8 @@ Follow these Bootstrap 5 rules for every partial:
 - All other placeholder images (team avatars, testimonial avatars): `https://placehold.co/[width]x[height]`
 - Section padding: `py-5` on all sections
 - Cards: `shadow-sm border-0 h-100`
+- contact-form: the `<form>` element MUST include `action="https://formspree.io/f/YOUR_FORM_ID" method="POST"` — never a bare `<form>` tag
+- scroll-top-btn: already written to `[SITE_DIR]/partials/scroll-top-btn.html` in Step 6 — do NOT regenerate it here, skip it in this step
 
 Refer to the skill files in `.claude/commands/` for the exact HTML structure of each component. Generate content that is specific, on-brand, and consistent in tone across all sections.
 
