@@ -31,7 +31,13 @@ Derive a site slug from the brand name. This slug becomes the output folder name
 - "Sunshine Steps Daycare" → `sunshine-steps-daycare`
 - "TechLaunch SaaS" → `techlaunch-saas`
 
-Set `SITE_DIR = output/[slug]` and use this variable for every file path in all subsequent steps.
+**Collision check:** Before creating the directory, check whether `output/[slug]/` already has content from a previous build:
+```
+python -c "from pathlib import Path; p = Path('output/[slug]'); print('EXISTS' if p.exists() and any(p.iterdir()) else 'CLEAR')"
+```
+If the output is `EXISTS`, increment a numeric suffix until you find an unused folder (`[slug]-2`, `[slug]-3`, etc.) and use that as the final slug. Inform the user: "A previous build already exists at `output/[slug]/`. Using `output/[slug]-2/` instead." Update `SITE_DIR` to the new value before proceeding.
+
+Set `SITE_DIR = output/[slug]` (or the suffixed version if a collision was found) and use this variable for every file path in all subsequent steps.
 
 Create the required directories using the Bash tool:
 ```
@@ -162,24 +168,13 @@ python scripts/assemble.py [SITE_DIR]/site.json
 
 ---
 
-## Step 11 — Generate SEO meta tags
-
-Read `.claude/commands/seo-meta.md` and execute it with `SITE_DIR` set to `[SITE_DIR]`. It will:
-- Discover all pages from `[SITE_DIR]/site.json` and any `[SITE_DIR]/*-site.json` files
-- Write `[SITE_DIR]/site-meta.json` with descriptions and Open Graph tags for every page
-- Re-assemble all pages so meta tags appear in the `<head>` of each HTML file
-
-If a base URL was mentioned in $ARGUMENTS (e.g. "use domain mybrand.com"), pass it to the skill. Otherwise it will use `https://example.com` as a placeholder.
-
----
-
-## Step 12 — Build additional pages (if requested)
+## Step 11 — Build additional pages (if requested)
 
 Skip this step entirely if `additional_pages` is empty.
 
 If additional pages were requested, do the following for each page type in the list:
 
-### 12a — Invoke the page-builder agent
+### 11a — Invoke the page-builder agent
 
 Read `.claude/agents/page-builder.md` and execute it with:
 - `page_type`: the page type (e.g. "about")
@@ -195,7 +190,7 @@ Read `.claude/agents/page-builder.md` and execute it with:
 
 The agent will generate partials, write `[SITE_DIR]/[page_type]-site.json`, and produce `[SITE_DIR]/[page_type].html`.
 
-### 12b — Update the landing page navbar
+### 11b — Update the landing page navbar
 
 After ALL additional pages have been built, regenerate `[SITE_DIR]/partials/navbar.html` so it links to every page in the site using full filenames:
 - Landing page sections become `href="index.html#section-id"` (so they still work from other pages)
@@ -208,6 +203,19 @@ python scripts/assemble.py [SITE_DIR]/site.json
 
 ---
 
+## Step 12 — Generate SEO meta tags
+
+Now that all pages (landing page and any additional pages) have been assembled, run the SEO meta skill so every page gets meta tags.
+
+Read `.claude/commands/seo-meta.md` and execute it with `SITE_DIR` set to `[SITE_DIR]`. It will:
+- Discover all pages from `[SITE_DIR]/site.json` and any `[SITE_DIR]/*-site.json` files
+- Write `[SITE_DIR]/site-meta.json` with descriptions and Open Graph tags for every page
+- Re-assemble all pages so meta tags appear in the `<head>` of each HTML file
+
+If a base URL was mentioned in $ARGUMENTS (e.g. "use domain mybrand.com"), pass it to the skill. Otherwise it will use `https://example.com` as a placeholder.
+
+---
+
 ## Step 13 — Run the review agent
 
 Read `.claude/agents/review.md` and execute it with `SITE_DIR` set to `[SITE_DIR]`. The agent will audit all assembled HTML files, run 10 checks, auto-fix simple issues (copyright year, font mismatches), and output a PASS/WARN/FAIL report.
@@ -215,6 +223,11 @@ Read `.claude/agents/review.md` and execute it with `SITE_DIR` set to `[SITE_DIR
 ---
 
 ## Step 14 — Report to the user
+
+Before reporting, record this build as the most recent site so standalone agents can discover it automatically:
+```
+python -c "open('output/.last-build', 'w').write('[slug]'); print('Recorded last build: [slug]')"
+```
 
 After successful assembly and review, report:
 1. Site folder: `[SITE_DIR]/` (e.g. "Your site was built in `output/serenity-flow/`")

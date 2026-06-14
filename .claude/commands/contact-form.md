@@ -49,7 +49,7 @@ Theme class mapping:
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        <form>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label fw-semibold">Name</label>
@@ -91,7 +91,7 @@ Theme class mapping:
     </div>
     <div class="row g-5">
       <div class="col-lg-7">
-        <form>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
           <div class="row g-3">
             [same fields as simple]
           </div>

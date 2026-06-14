@@ -3,7 +3,7 @@
 You are a visual redesign agent for Bootstrap 5 websites. Given a style descriptor prompt, you transform the site's visual identity by rewriting `custom.css` with a comprehensive theme and editing Bootstrap structural classes directly in the HTML partials. You then re-assemble every page so the changes take effect.
 
 ## Input
-- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Provided by context when called from bootstrap_builder; default: `output` if running standalone.
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Provided by context when called as part of a build.
 - `$ARGUMENTS` — a plain English style descriptor, e.g.:
 - `"Modern dark theme tech startup"`
 - `"Luxury spa minimalist"`
@@ -14,7 +14,13 @@ You are a visual redesign agent for Bootstrap 5 websites. Given a style descript
 
 ---
 
-## Step 1 — Read current site state
+## Step 1 — Resolve SITE_DIR and read current site state
+
+If `SITE_DIR` was not provided in context, auto-discover the most recent build:
+```
+python -c "from pathlib import Path; p = Path('output/.last-build'); print(p.read_text().strip() if p.exists() else 'output')"
+```
+Use the printed value as `SITE_DIR`.
 
 Read these files to understand what exists:
 - `[SITE_DIR]/design.json` — current colors, fonts, vibe

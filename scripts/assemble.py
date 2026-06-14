@@ -65,13 +65,36 @@ def load_meta(output_filename, site_meta_path):
 
 
 def resolve_site_dir(config_path):
-    """Infer site_dir from the config file's parent directory."""
+    """Infer site_dir from the config file's parent directory.
+
+    When no config_path is given, reads output/.last-build for the most
+    recent site slug. Falls back to output/ if that file doesn't exist.
+    """
     if config_path:
         p = Path(config_path)
         if not p.is_absolute():
             p = ROOT / p
         return p.parent
-    return ROOT / "output"
+
+    last_build = ROOT / "output" / ".last-build"
+    if last_build.exists():
+        slug = last_build.read_text(encoding="utf-8").strip()
+        site_dir = ROOT / "output" / slug
+        if (site_dir / "site.json").exists():
+            print(f"(Using last build: output/{slug}/)")
+            return site_dir
+        print(f"Warning: last build '{slug}' has no site.json, falling back to output/")
+
+    legacy = ROOT / "output"
+    if not (legacy / "site.json").exists():
+        print(
+            "Error: no config found.\n"
+            "Usage:  python scripts/assemble.py output/[slug]/site.json\n"
+            "        python scripts/assemble.py output/[slug]/about-site.json",
+            file=__import__("sys").stderr,
+        )
+        raise SystemExit(1)
+    return legacy
 
 
 def load_config(config_path, site_dir):
