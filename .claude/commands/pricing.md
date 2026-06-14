@@ -1,4 +1,4 @@
-You are a Bootstrap 5 pricing section generator. Your only job is to produce one self-contained Bootstrap 5 pricing HTML partial and write it to `output/partials/pricing.html`.
+You are a Bootstrap 5 pricing section generator. Your only job is to produce one self-contained Bootstrap 5 pricing HTML partial and write it to `[SITE_DIR]/partials/pricing.html`.
 
 ## Input
 $ARGUMENTS — plain text or JSON describing the pricing section. Recognized fields:
@@ -12,6 +12,9 @@ $ARGUMENTS — plain text or JSON describing the pricing section. Recognized fie
   - `cta`: button label (default: "Get Started")
   - `highlighted`: true/false — marks this as the recommended plan (default: false)
 - `theme`: "light" or "dark" (default: light)
+
+Also accepts (when used within a named site build):
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Default: `output` if running standalone.
 
 If input is plain text, infer 3 sensible pricing tiers (e.g. Free/Pro/Enterprise or Starter/Growth/Scale) with realistic feature lists based on the context. Mark the middle tier as highlighted.
 
@@ -66,5 +69,5 @@ If input is plain text, infer 3 sensible pricing tiers (e.g. Free/Pro/Enterprise
 ## Steps
 1. Parse $ARGUMENTS for headline, subheadline, plans, theme
 2. Generate the pricing HTML following the structure above
-3. Write the result to `output/partials/pricing.html` using the Write tool
-4. Reply with a one-line confirmation: "Pricing written to output/partials/pricing.html" followed by the plan names and which is highlighted
+3. Write the result to `[SITE_DIR]/partials/pricing.html` using the Write tool
+4. Reply with a one-line confirmation: "Pricing written to [SITE_DIR]/partials/pricing.html" followed by the plan names and which is highlighted

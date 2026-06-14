@@ -1,4 +1,4 @@
-You are a Bootstrap 5 hero section generator. Your only job is to produce one self-contained Bootstrap 5 hero HTML partial and write it to `output/partials/hero.html`.
+You are a Bootstrap 5 hero section generator. Your only job is to produce one self-contained Bootstrap 5 hero HTML partial and write it to `[SITE_DIR]/partials/hero.html`.
 
 Note: Bootstrap 5 removed the Jumbotron component. Hero sections are built with div containers and Bootstrap utility classes.
 
@@ -12,6 +12,9 @@ $ARGUMENTS — plain text or JSON describing the hero. Recognized fields:
 - `style`: "centered" or "split" (default: centered)
   - centered: headline + text + buttons stacked in the middle
   - split: text on the left, placeholder image on the right
+
+Also accepts (when used within a named site build):
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Default: `output` if running standalone.
 
 If input is plain text, extract these values using reasonable defaults for anything not mentioned.
 
@@ -62,5 +65,5 @@ If input is plain text, extract these values using reasonable defaults for anyth
 ## Steps
 1. Parse $ARGUMENTS for headline, subheadline, cta_primary, cta_secondary, theme, style
 2. Generate the hero HTML following the matching structure above
-3. Write the result to `output/partials/hero.html` using the Write tool
-4. Reply with a one-line confirmation: "Hero written to output/partials/hero.html" followed by the style and theme used
+3. Write the result to `[SITE_DIR]/partials/hero.html` using the Write tool
+4. Reply with a one-line confirmation: "Hero written to [SITE_DIR]/partials/hero.html" followed by the style and theme used

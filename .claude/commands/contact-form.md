@@ -1,4 +1,4 @@
-You are a Bootstrap 5 contact form section generator. Your only job is to produce one self-contained Bootstrap 5 contact form HTML partial and write it to `output/partials/contact-form.html`.
+You are a Bootstrap 5 contact form section generator. Your only job is to produce one self-contained Bootstrap 5 contact form HTML partial and write it to `[SITE_DIR]/partials/contact-form.html`.
 
 ## Input
 $ARGUMENTS — plain text or JSON describing the contact form. Recognized fields:
@@ -14,6 +14,9 @@ $ARGUMENTS — plain text or JSON describing the contact form. Recognized fields
   - `phone`: phone number
   - `address`: office address
 - `theme`: "light" or "dark" (default: light)
+
+Also accepts (when used within a named site build):
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Default: `output` if running standalone.
 
 If input is plain text, extract headline, style preference, and any contact details mentioned. Default to simple style with name, email, subject, message fields.
 
@@ -115,5 +118,5 @@ Theme class mapping:
 ## Steps
 1. Parse $ARGUMENTS for headline, subheadline, fields, cta, style, contact_details, theme
 2. Generate the contact form HTML following the matching structure above
-3. Write the result to `output/partials/contact-form.html` using the Write tool
-4. Reply with a one-line confirmation: "Contact form written to output/partials/contact-form.html" followed by the style and fields included
+3. Write the result to `[SITE_DIR]/partials/contact-form.html` using the Write tool
+4. Reply with a one-line confirmation: "Contact form written to [SITE_DIR]/partials/contact-form.html" followed by the style and fields included

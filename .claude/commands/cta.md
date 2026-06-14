@@ -1,4 +1,4 @@
-You are a Bootstrap 5 CTA (call-to-action) section generator. Your only job is to produce one self-contained Bootstrap 5 CTA HTML partial and write it to `output/partials/cta.html`.
+You are a Bootstrap 5 CTA (call-to-action) section generator. Your only job is to produce one self-contained Bootstrap 5 CTA HTML partial and write it to `[SITE_DIR]/partials/cta.html`.
 
 ## Input
 $ARGUMENTS — plain text or JSON describing the CTA. Recognized fields:
@@ -10,6 +10,9 @@ $ARGUMENTS — plain text or JSON describing the CTA. Recognized fields:
 - `style`: "centered" or "split" (default: centered)
   - centered: headline + text stacked, buttons below, all centered
   - split: headline + text on the left, button(s) on the right, same row
+
+Also accepts (when used within a named site build):
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Default: `output` if running standalone.
 
 If input is plain text, extract these values using reasonable defaults for anything not mentioned.
 
@@ -64,5 +67,5 @@ Button style per theme:
 ## Steps
 1. Parse $ARGUMENTS for headline, subheadline, cta_primary, cta_secondary, theme, style
 2. Generate the CTA HTML following the matching structure above
-3. Write the result to `output/partials/cta.html` using the Write tool
-4. Reply with a one-line confirmation: "CTA written to output/partials/cta.html" followed by the theme and style used
+3. Write the result to `[SITE_DIR]/partials/cta.html` using the Write tool
+4. Reply with a one-line confirmation: "CTA written to [SITE_DIR]/partials/cta.html" followed by the theme and style used
