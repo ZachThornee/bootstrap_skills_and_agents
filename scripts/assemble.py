@@ -4,9 +4,6 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-PARTIALS_DIR = ROOT / "output" / "partials"
-OUTPUT_DIR = ROOT / "output"
-SITE_CONFIG = ROOT / "output" / "site.json"
 
 DEFAULT_SECTIONS = [
     "navbar", "hero", "features", "testimonials",
@@ -20,7 +17,7 @@ HTML_HEAD = """\
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+{meta_block}  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="custom.css">
 </head>
@@ -35,26 +32,76 @@ HTML_FOOT = """
 """
 
 
-def load_config(config_path=None):
-    path = Path(config_path) if config_path else SITE_CONFIG
-    if path.exists():
-        with open(path, encoding="utf-8") as f:
+def load_meta(output_filename, site_meta_path):
+    if not site_meta_path.exists():
+        return ""
+    with open(site_meta_path, encoding="utf-8") as f:
+        meta = json.load(f)
+    page_meta = meta.get(output_filename, {})
+    if not page_meta:
+        return ""
+    lines = []
+    if page_meta.get("description"):
+        lines.append(f'  <meta name="description" content="{page_meta["description"]}">')
+    if page_meta.get("canonical"):
+        lines.append(f'  <link rel="canonical" href="{page_meta["canonical"]}">')
+    if page_meta.get("og_title"):
+        lines.append(f'  <meta property="og:title" content="{page_meta["og_title"]}">')
+    if page_meta.get("og_description"):
+        lines.append(f'  <meta property="og:description" content="{page_meta["og_description"]}">')
+    if page_meta.get("og_image"):
+        lines.append(f'  <meta property="og:image" content="{page_meta["og_image"]}">')
+    if page_meta.get("og_type"):
+        lines.append(f'  <meta property="og:type" content="{page_meta["og_type"]}">')
+    if page_meta.get("twitter_card"):
+        lines.append(f'  <meta name="twitter:card" content="{page_meta["twitter_card"]}">')
+    if page_meta.get("og_title"):
+        lines.append(f'  <meta name="twitter:title" content="{page_meta["og_title"]}">')
+    if page_meta.get("og_description"):
+        lines.append(f'  <meta name="twitter:description" content="{page_meta["og_description"]}">')
+    if page_meta.get("og_image"):
+        lines.append(f'  <meta name="twitter:image" content="{page_meta["og_image"]}">')
+    return "\n".join(lines) + "\n" if lines else ""
+
+
+def resolve_site_dir(config_path):
+    """Infer site_dir from the config file's parent directory."""
+    if config_path:
+        p = Path(config_path)
+        if not p.is_absolute():
+            p = ROOT / p
+        return p.parent
+    return ROOT / "output"
+
+
+def load_config(config_path, site_dir):
+    p = Path(config_path) if config_path else site_dir / "site.json"
+    if not p.is_absolute():
+        p = ROOT / p
+    if p.exists():
+        with open(p, encoding="utf-8") as f:
             return json.load(f)
     return {"title": "My Website", "sections": DEFAULT_SECTIONS}
 
 
 def assemble(config_path=None):
-    config = load_config(config_path)
+    site_dir = resolve_site_dir(config_path)
+    partials_dir = site_dir / "partials"
+    site_meta_path = site_dir / "site-meta.json"
+
+    config = load_config(config_path, site_dir)
     title = config.get("title", "My Website")
     sections = config.get("sections", DEFAULT_SECTIONS)
-    output_file = OUTPUT_DIR / config.get("output", "index.html")
+    output_filename = config.get("output", "index.html")
+    output_file = site_dir / output_filename
 
     included = []
     skipped = []
-    parts = [HTML_HEAD.format(title=title)]
+    meta_block = load_meta(output_filename, site_meta_path)
+    parts = [HTML_HEAD.format(title=title, meta_block=meta_block)]
 
     for section in sections:
-        partial = PARTIALS_DIR / f"{section}.html"
+        partial = partials_dir / f"{section}.html"
         if partial.exists():
             parts.append(f"\n<!-- {section} -->\n")
             parts.append(partial.read_text(encoding="utf-8"))

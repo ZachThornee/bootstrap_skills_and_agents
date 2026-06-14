@@ -7,6 +7,7 @@ You will receive:
 - `industry`: type of business (e.g. daycare, fitness, legal, SaaS, restaurant)
 - `tone`: the desired feel (e.g. playful, bold, professional, minimal, warm, trustworthy)
 - `brand`: the business name (for context)
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Default: `output` if running standalone.
 
 ## Process
 
@@ -39,8 +40,8 @@ Based on your research, make deliberate design decisions:
 
 **Vibe** — one word summarizing the aesthetic (e.g. playful, bold, minimal, warm, clinical, energetic, trustworthy, sophisticated).
 
-### Step 4 — Write output/design.json
-Write the design profile using the Write tool:
+### Step 4 — Write [SITE_DIR]/design.json
+Write the design profile using the Write tool (using the SITE_DIR value from context, defaulting to `output` if unset):
 
 ```json
 {
@@ -55,8 +56,8 @@ Write the design profile using the Write tool:
 }
 ```
 
-### Step 5 — Generate custom.css
-Using the design profile, write `output/custom.css` with:
+### Step 5 — Generate [SITE_DIR]/custom.css
+Using the design profile, write `[SITE_DIR]/custom.css` with:
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=[font_heading]:wght@400;600;700&family=[font_body]:wght@400;500;600&display=swap');
@@ -117,7 +118,7 @@ Reply with:
 - The chosen primary color and why
 - The font pairing and why
 - The one-word vibe
-- Confirmation that `output/design.json` and `output/custom.css` have been written
+- Confirmation that `[SITE_DIR]/design.json` and `[SITE_DIR]/custom.css` have been written
 
 ## Rules
 - Never default to Bootstrap blue (#0d6efd) — the entire point is differentiation

@@ -17,7 +17,30 @@ Extract the following from $ARGUMENTS:
 
 ---
 
-## Step 2 — Decide which sections to include
+## Step 2 — Establish SITE_DIR
+
+Derive a site slug from the brand name. This slug becomes the output folder name.
+
+**Slug rules:**
+1. If $ARGUMENTS contains an explicit folder name (e.g. "save as my-project", "name the folder cool-brand", "folder name my-site"), use that value exactly as the slug.
+2. Otherwise, slugify the brand name: lowercase all letters, replace spaces and special characters with hyphens, strip common filler words ("a", "an", "the", "landing", "page", "website", "for"), collapse multiple hyphens, trim to 40 characters.
+
+**Examples:**
+- "Serenity Flow Yoga Studio" → `serenity-flow-yoga-studio`
+- "The Oak & Barrel Gastropub" → `oak-barrel-gastropub`
+- "Sunshine Steps Daycare" → `sunshine-steps-daycare`
+- "TechLaunch SaaS" → `techlaunch-saas`
+
+Set `SITE_DIR = output/[slug]` and use this variable for every file path in all subsequent steps.
+
+Create the required directories using the Bash tool:
+```
+python -c "from pathlib import Path; Path('output/[slug]/partials').mkdir(parents=True, exist_ok=True); print('Created output/[slug]/partials')"
+```
+
+---
+
+## Step 3 — Decide which sections to include
 
 Use this decision matrix. Be selective — a focused 5-6 section site is better than a bloated one:
 
@@ -44,35 +67,44 @@ If no additional pages are mentioned, `additional_pages` is empty and this is a 
 
 ---
 
-## Step 3 — Source the hero image
+## Step 4 — Source the hero image
 
 Before building content, find a relevant image for the hero section.
 
 Check $ARGUMENTS for a user-provided image URL or file path first. If found, use it directly.
 
-If no image is provided, extract 2-3 image keywords from the prompt (e.g. "personal trainer fitness", "coffee shop interior", "SaaS team working") and run the `/find-image` skill by reading `.claude/commands/find-image.md` and executing it with those keywords.
+If no image is provided, extract 2-3 image keywords from the prompt (e.g. "personal trainer fitness", "coffee shop interior", "SaaS team working") and run the `/find-image` skill by reading `.claude/commands/find-image.md` and executing it with those keywords and `SITE_DIR` set to `[SITE_DIR]`.
 
-After the skill runs, read `output/image.json` to get the `hero_image` URL and `alt` text. Use these in the hero partial in Step 5. If `output/image.json` does not exist or the URL is empty, fall back to:
+After the skill runs, read `[SITE_DIR]/image.json` to get the `hero_image` URL and `alt` text. Use these in the hero partial in Step 8. If `[SITE_DIR]/image.json` does not exist or the URL is empty, fall back to:
 `https://source.unsplash.com/800x500/?[keywords-joined-by-plus]`
 
 ---
 
-## Step 4 — Run the design profile agent
+## Step 5 — Run the design profile agent
 
 Before writing any HTML, establish the visual identity for the site.
 
-Check $ARGUMENTS for explicit color or font preferences. If the user has specified colors or fonts, skip this step and use them directly when generating `output/custom.css` later.
+Check $ARGUMENTS for explicit color or font preferences. If the user has specified colors or fonts, skip this step and use them directly when generating `[SITE_DIR]/custom.css` later.
 
 If no design preferences are given, invoke the design profile agent by reading `.claude/agents/design-profile.md` and executing it with:
 - `industry`: the industry extracted in Step 1
 - `tone`: the tone extracted in Step 1
 - `brand`: the brand name extracted in Step 1
+- `SITE_DIR`: `[SITE_DIR]`
 
-The agent will write `output/design.json` and `output/custom.css`. After it completes, read `output/design.json` to confirm the primary color, fonts, and vibe. Use the vibe and tone to inform the copy written in Step 5 — a "playful" vibe should produce warmer, more energetic copy than a "minimal" vibe.
+The agent will write `[SITE_DIR]/design.json` and `[SITE_DIR]/custom.css`. After it completes, read `[SITE_DIR]/design.json` to confirm the primary color, fonts, and vibe. Use the vibe and tone to inform the copy written in Step 7 — a "playful" vibe should produce warmer, more energetic copy than a "minimal" vibe.
 
 ---
 
-## Step 5 — Build content plan
+## Step 6 — Generate custom.js
+
+Read `.claude/commands/custom-js.md` and execute it with `SITE_DIR` set to `[SITE_DIR]`.
+
+This writes `[SITE_DIR]/custom.js` and `[SITE_DIR]/partials/scroll-top-btn.html`.
+
+---
+
+## Step 7 — Build content plan
 
 For each included section, plan specific content tailored to the brand. Never use Lorem Ipsum. Everything must feel like it belongs to this specific business.
 
@@ -90,9 +122,9 @@ Plan the following:
 
 ---
 
-## Step 6 — Write site.json
+## Step 8 — Write site.json
 
-Write `output/site.json` using the Write tool:
+Write `[SITE_DIR]/site.json` using the Write tool:
 ```json
 {
   "title": "[brand name]",
@@ -102,9 +134,9 @@ Write `output/site.json` using the Write tool:
 
 ---
 
-## Step 7 — Generate each partial
+## Step 9 — Generate each partial
 
-For each section in the chosen list, generate the HTML and write it to `output/partials/[section].html` using the Write tool.
+For each section in the chosen list, generate the HTML and write it to `[SITE_DIR]/partials/[section].html` using the Write tool.
 
 Follow these Bootstrap 5 rules for every partial:
 - Bootstrap 5 classes only — no custom CSS, no inline styles (except the scroll-top-btn fixed positioning)
@@ -112,7 +144,7 @@ Follow these Bootstrap 5 rules for every partial:
 - All nav links must use `href="#[section-id]"` — never `href="#"` alone
 - Font Awesome 6 solid icons: `fa-solid fa-[icon]`
 - Font Awesome 6 brand icons: `fa-brands fa-[icon]`
-- Hero image: use the URL from `output/image.json` — do NOT use placehold.co for the hero
+- Hero image: use the URL from `[SITE_DIR]/image.json` — do NOT use placehold.co for the hero
 - All other placeholder images (team avatars, testimonial avatars): `https://placehold.co/[width]x[height]`
 - Section padding: `py-5` on all sections
 - Cards: `shadow-sm border-0 h-100`
@@ -121,54 +153,74 @@ Refer to the skill files in `.claude/commands/` for the exact HTML structure of 
 
 ---
 
-## Step 8 — Run the assembly script
+## Step 10 — Run the assembly script
 
 Run the following command using the Bash tool:
 ```
-python scripts/assemble.py
+python scripts/assemble.py [SITE_DIR]/site.json
 ```
 
 ---
 
-## Step 9 — Build additional pages (if requested)
+## Step 11 — Generate SEO meta tags
+
+Read `.claude/commands/seo-meta.md` and execute it with `SITE_DIR` set to `[SITE_DIR]`. It will:
+- Discover all pages from `[SITE_DIR]/site.json` and any `[SITE_DIR]/*-site.json` files
+- Write `[SITE_DIR]/site-meta.json` with descriptions and Open Graph tags for every page
+- Re-assemble all pages so meta tags appear in the `<head>` of each HTML file
+
+If a base URL was mentioned in $ARGUMENTS (e.g. "use domain mybrand.com"), pass it to the skill. Otherwise it will use `https://example.com` as a placeholder.
+
+---
+
+## Step 12 — Build additional pages (if requested)
 
 Skip this step entirely if `additional_pages` is empty.
 
 If additional pages were requested, do the following for each page type in the list:
 
-### 9a — Invoke the page-builder agent
+### 12a — Invoke the page-builder agent
 
 Read `.claude/agents/page-builder.md` and execute it with:
 - `page_type`: the page type (e.g. "about")
 - `brand`: the brand name from Step 1
 - `industry`: the industry from Step 1
 - `tone`: the tone from Step 1
+- `SITE_DIR`: `[SITE_DIR]`
 - `all_pages`: a list of all pages in the site, including the landing page and every additional page. Format:
   ```
   [{"label": "Home", "url": "index.html"}, {"label": "About", "url": "about.html"}, ...]
   ```
   Use a capitalised label for each page type (About, Contact, Services, etc.).
 
-The agent will generate partials, write `output/[page_type]-site.json`, and produce `output/[page_type].html`.
+The agent will generate partials, write `[SITE_DIR]/[page_type]-site.json`, and produce `[SITE_DIR]/[page_type].html`.
 
-### 9b — Update the landing page navbar
+### 12b — Update the landing page navbar
 
-After ALL additional pages have been built, regenerate `output/partials/navbar.html` so it links to every page in the site using full filenames:
+After ALL additional pages have been built, regenerate `[SITE_DIR]/partials/navbar.html` so it links to every page in the site using full filenames:
 - Landing page sections become `href="index.html#section-id"` (so they still work from other pages)
 - Additional pages get their own `<li>` with `href="[page].html"`
 
 Then re-run the landing page assembly to pick up the new navbar:
 ```
-python scripts/assemble.py
+python scripts/assemble.py [SITE_DIR]/site.json
 ```
 
 ---
 
-## Step 10 — Report to the user
+## Step 13 — Run the review agent
 
-After successful assembly, report:
-1. Files assembled (e.g. "output/index.html, output/about.html")
-2. A brief list of which sections were included on the landing page
-3. Which additional pages were generated and what sections each contains
-4. One short sentence on any sections that were intentionally left out and why
-5. A suggestion for what to refine next (e.g., "replace placeholder images with real photos", "swap the primary color", "add a gallery section")
+Read `.claude/agents/review.md` and execute it with `SITE_DIR` set to `[SITE_DIR]`. The agent will audit all assembled HTML files, run 10 checks, auto-fix simple issues (copyright year, font mismatches), and output a PASS/WARN/FAIL report.
+
+---
+
+## Step 14 — Report to the user
+
+After successful assembly and review, report:
+1. Site folder: `[SITE_DIR]/` (e.g. "Your site was built in `output/serenity-flow/`")
+2. Files assembled (e.g. "`index.html`, `about.html`, `contact.html`")
+3. A brief list of which sections were included on the landing page
+4. Which additional pages were generated and what sections each contains
+5. One short sentence on any sections that were intentionally left out and why
+6. A summary of the review report (how many PASS/WARN/FAIL, and the most important action items)
+7. A suggestion for what to refine next (e.g., "replace placeholder images with real photos", "run restyle agent to change the visual theme")

@@ -1,4 +1,4 @@
-You are a Bootstrap 5 custom JavaScript generator. Your only job is to produce one `output/custom.js` file that adds interactivity to the assembled Bootstrap website.
+You are a Bootstrap 5 custom JavaScript generator. Your only job is to produce `[SITE_DIR]/custom.js` and `[SITE_DIR]/partials/scroll-top-btn.html` that add interactivity to the assembled Bootstrap website.
 
 ## Input
 $ARGUMENTS — plain text or JSON. Recognized fields:
@@ -6,6 +6,9 @@ $ARGUMENTS — plain text or JSON. Recognized fields:
 - `scroll_spy`: true/false — highlight the active nav link based on scroll position (default: true)
 - `form_handler`: true/false — intercept contact form submit, show success feedback (default: true)
 - `scroll_top`: true/false — show a scroll-to-top button after scrolling down (default: true)
+
+Also accepts (when invoked by bootstrap_builder):
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Default: `output` if running standalone.
 
 If no arguments provided, generate all four features with defaults.
 
@@ -92,11 +95,11 @@ The scroll-to-top button HTML (inject just before the closing </body> tag in you
   <i class="fa-solid fa-arrow-up"></i>
 </button>
 ```
-Write this button HTML to `output/partials/scroll-top-btn.html` as well.
+Write this button HTML to `[SITE_DIR]/partials/scroll-top-btn.html` as well.
 
 ## Steps
 1. Parse $ARGUMENTS for which features to include
 2. Generate the JS following the structure above, including only enabled features
-3. Write the JS to `output/custom.js` using the Write tool
-4. Write the scroll-to-top button HTML to `output/partials/scroll-top-btn.html`
+3. Write the JS to `[SITE_DIR]/custom.js` using the Write tool (using the SITE_DIR value from context, defaulting to `output` if unset)
+4. Write the scroll-to-top button HTML to `[SITE_DIR]/partials/scroll-top-btn.html`
 5. Reply: "custom.js written" followed by a bullet list of the features included

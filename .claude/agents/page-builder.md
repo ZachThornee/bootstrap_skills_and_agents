@@ -5,6 +5,7 @@ You are a Bootstrap 5 page builder agent. Given a page type and brand context, y
 - `brand`: brand name
 - `industry`: type of business
 - `tone`: professional / casual / bold / friendly / minimal / playful
+- `SITE_DIR`: path to the site-specific output directory (e.g. `output/serenity-flow`). Default: `output` if running standalone.
 - `all_pages`: list of all pages in the site — used to build cross-page nav links
   Format: `[{"label": "Home", "url": "index.html"}, {"label": "About", "url": "about.html"}, ...]`
 
@@ -12,7 +13,7 @@ You are a Bootstrap 5 page builder agent. Given a page type and brand context, y
 
 ## Step 1 — Read the design profile
 
-Read `output/design.json` to get the site's `primary` color, `font_heading`, `font_body`, and `vibe`. All copy and design decisions must match this profile.
+Read `[SITE_DIR]/design.json` to get the site's `primary` color, `font_heading`, `font_body`, and `vibe`. All copy and design decisions must match this profile.
 
 ---
 
@@ -51,7 +52,7 @@ Plan specific, on-brand content for every section you will generate. Never use L
 
 ## Step 4 — Generate each partial
 
-Write each page-specific section to `output/partials/[section-name].html` using the Write tool.
+Write each page-specific section to `[SITE_DIR]/partials/[section-name].html` using the Write tool.
 
 Bootstrap 5 rules:
 - Bootstrap 5 classes only — no custom CSS, no inline styles (except scroll-top-btn fixed positioning)
@@ -86,7 +87,7 @@ Bootstrap 5 rules:
 
 ## Step 5 — Write the page site.json
 
-Write `output/[page_type]-site.json`:
+Write `[SITE_DIR]/[page_type]-site.json`:
 ```json
 {
   "title": "[Page Label] | [Brand Name]",
@@ -101,7 +102,7 @@ Write `output/[page_type]-site.json`:
 
 Run the following command using the Bash tool:
 ```
-python scripts/assemble.py output/[page_type]-site.json
+python scripts/assemble.py [SITE_DIR]/[page_type]-site.json
 ```
 
-Confirm the output file was created at `output/[page_type].html`.
+Confirm the output file was created at `[SITE_DIR]/[page_type].html`.
